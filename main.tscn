@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://b58w1larvy46m"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_swt63"]
+[ext_resource type="Texture2D" uid="uid://b57q03ahgaua4" path="res://assets/grass.png" id="2_y2kqr"]
+[ext_resource type="PackedScene" uid="uid://clypqhpoii06f" path="res://player.tscn" id="3_5pbas"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_swt63")
+
+[node name="Background" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_y2kqr")
+stretch_mode = 1
+
+[node name="Player" parent="." instance=ExtResource("3_5pbas")]
+
+[node name="GameTimer" type="TextureRect" parent="."]
+offset_left = 87.0
+offset_top = -31.0
+offset_right = 127.0
+offset_bottom = 9.0
