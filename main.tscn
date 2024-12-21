@@ -1,10 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://b58w1larvy46m"]
+[gd_scene load_steps=10 format=3 uid="uid://b58w1larvy46m"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_swt63"]
 [ext_resource type="PackedScene" uid="uid://ds1qqop6kge28" path="res://coin.tscn" id="2_wy8ct"]
 [ext_resource type="Texture2D" uid="uid://b57q03ahgaua4" path="res://assets/grass.png" id="2_y2kqr"]
 [ext_resource type="PackedScene" uid="uid://clypqhpoii06f" path="res://player.tscn" id="3_5pbas"]
 [ext_resource type="PackedScene" uid="uid://c8fhax1hy37yu" path="res://hud.tscn" id="4_1dd8v"]
+[ext_resource type="AudioStream" uid="uid://mes43krihria" path="res://assets/audio/Coin.wav" id="6_h7xkx"]
+[ext_resource type="AudioStream" uid="uid://c24nhx3bwaf5i" path="res://assets/audio/Level.wav" id="7_7c2t5"]
+[ext_resource type="AudioStream" uid="uid://b7mx42uy56mrl" path="res://assets/audio/EndSound.wav" id="8_1d4n0"]
+[ext_resource type="AudioStream" uid="uid://112o7ambu5pv" path="res://assets/audio/Powerup.wav" id="9_ei0cm"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_swt63")
@@ -30,6 +34,22 @@ stretch_mode = 1
 [node name="Player" parent="." instance=ExtResource("3_5pbas")]
 position = Vector2(117, 558)
 
+[node name="CoinSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_h7xkx")
+
+[node name="LevelSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_7c2t5")
+
+[node name="EndSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_1d4n0")
+
+[node name="PowerupTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Powerup" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_ei0cm")
+
 [connection signal="start_game" from="HUD" to="." method="_on_hud_start_game"]
 [connection signal="timeout" from="GameTimer" to="." method="_on_game_timer_timeout"]
 [connection signal="pickup" from="Player" to="." method="_on_player_pickup"]
+[connection signal="timeout" from="PowerupTimer" to="." method="_on_powerup_timer_timeout"]
